@@ -9,7 +9,7 @@ public class BeverageTestDrive {
 		System.out.println("Making tea...");
 		tea.prepareRecipe();
 		
-		System.out.println("/nMaking coffee...");
+		System.out.println("\nMaking coffee...");
 		coffeeWithHook.prepareRecipe();
 	}
 }
