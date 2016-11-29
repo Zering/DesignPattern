@@ -1,8 +1,74 @@
 package headfirst.state;
 
 public class GumballMachine {
+	
+	State soldOutState;
+	State noQuarterState;
+	State hasQuarterState;
+	State soldState;
+	
+	State state = soldOutState;
+	int count = 0;
+	
+	public GumballMachine(int numberGumballs) {
+		soldOutState = new SoldOutState(this);
+		noQuarterState = new NoQuarterState(this);
+		hasQuarterState = new HasQuarterState(this);
+		soldState = new SoldState(this);
+		
+		this.count = numberGumballs;
+		if (numberGumballs >0) {
+			state = noQuarterState;
+		}
+	}
+	
+	public void insertQuarter() {
+		state.insertQuarter();
+	}
+	
+	public void ejectQuarter() {
+		state.ejectQuarter();
+	}
+	
+	public void turnCrank() {
+		state.turnCrank();
+		state.dispense();
+	}
+	
+	public void releaseBall() {
+		System.out.println("A gumball comes rolling out the slot...");
+		if (count != 0) {
+			count = count - 1;
+		}
+	}
+	
 
-	static final int SOLD_OUT = 0;
+	public int getCount() {
+		return count;
+	}
+
+	public State getSoldOutState() {
+		return soldOutState;
+	}
+
+	public State getNoQuarterState() {
+		return noQuarterState;
+	}
+
+	public State getHasQuarterState() {
+		return hasQuarterState;
+	}
+
+	public State getSoldState() {
+		return soldState;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	
+/*	static final int SOLD_OUT = 0;
 	static final int NO_QUARTER = 1;
 	static final int HAS_QUARTER = 2;
 	static final int SOLD = 3;
@@ -17,9 +83,9 @@ public class GumballMachine {
 		}
 	}
 	
-	/**
+	*//**
 	 * 投入25分硬币 
-	 */
+	 *//*
 	public void insertQuarter() {
 		if (state == HAS_QUARTER) {
 			System.out.println("You can't insert another quarter");
@@ -33,9 +99,9 @@ public class GumballMachine {
 		}
 	}
 	
-	/**
+	*//**
 	 * 退回硬币
-	 */
+	 *//*
 	public void ejectQuarter() {
 		if (state == HAS_QUARTER) {
 			System.out.println("Quarter returned");
@@ -49,9 +115,9 @@ public class GumballMachine {
 		}
 	}
 	
-	/**
+	*//**
 	 * 扭动曲柄
-	 */
+	 *//*
 	public void turnCrank() {
 		if (state == SOLD) {
 			System.out.println("Turning twice doesn't get you another gumball");
@@ -66,9 +132,9 @@ public class GumballMachine {
 		}
 	}
 
-	/**
+	*//**
 	 * 分发糖果
-	 */
+	 *//*
 	public void dispense() {
 		if (state == SOLD) {
 			System.out.println("A gumball comes rolling out the slot");
@@ -86,7 +152,7 @@ public class GumballMachine {
 		} else if (state == HAS_QUARTER) {
 			System.out.println("No gumball despensed");
 		}
-	}
+	}*/
 	
 	
 }
